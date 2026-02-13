@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stock Simulator Pro</title>
+  <script src="chart.local.js"></script>
+  <style>
+    :root{
+      --primary-bg: #FAF8F3; /* off-white background */
+      --card-bg: #fefdfb; /* off-white card */
+      --action-green: #E8E3DB; /* Off-white (bullish) */
+      --alert-red: #D9D2C8; /* Off-white/beige (bearish) */
+      --text-primary: #5c4a38; /* brown text */
+      --text-secondary: #8B6F47; /* medium brown */
+      --highlight-green: #7CFC00;
+      --chart-line: #6B5B3F; /* dark brown */
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Inter, Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(180deg, var(--primary-bg), #f5f1ea 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    
+    /* Auth Pages */
+    .auth-page { display: none; }
+    .auth-page.active { display: block; }
+    .auth-container {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 500px;
+      margin: 100px auto;
+      box-shadow: 0 6px 20px rgba(31,41,55,0.08);
+      color: var(--text-primary);
+    }
+    .auth-container h1 { margin-bottom: 30px; color: var(--text-primary); text-align: center; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; margin-bottom: 8px; color: var(--text-secondary); font-weight: 500; }
+    .form-group input { width: 100%; padding: 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06); background: #F0F0F5; color: #111; }
+    .form-group input:focus { outline: none; border-color: rgba(58,197,92,0.6); }
+    button { width: 100%; padding: 12px; background: var(--action-green); color: #07210b; border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 10px; box-shadow: 0 6px 18px rgba(58,197,92,0.08); }
+    button:hover { filter: brightness(1.03); }
+    .toggle-auth { text-align: center; margin-top: 20px; color: var(--text-secondary); }
+    .toggle-auth a { color: var(--action-green); cursor: pointer; text-decoration: underline; }
+    .error { color: var(--alert-red); font-size: 14px; margin-top: 10px; }
+    
+    /* Dashboard */
+    .dashboard { display: none; }
+    .dashboard.active { display: block; }
+    .header {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 6px 18px rgba(31,41,55,0.06);
+      border-left: 4px solid rgba(58,197,92,0.06);
+      color: var(--text-primary);
+    }
+    .user-info { color: var(--text-primary); }
+    .user-info strong { font-size: 18px; }
+    .btn-logout { background: var(--alert-red); padding: 8px 20px; font-size: 14px; color: var(--text-primary); border: none; border-radius:6px; }
+    .btn-logout:hover { filter: brightness(1.03); }
+    
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 20px; }
+    .stat-card { background: var(--card-bg); padding: 20px; border-radius: 12px; box-shadow: 0 6px 18px rgba(31,41,55,0.06); border-top: 2px solid rgba(16,24,40,0.03); color: var(--text-primary); }
+    .stat-card h3 { color: var(--text-secondary); font-size: 14px; text-transform: uppercase; }
+    .stat-card .value { font-size: 28px; font-weight: 700; color: var(--chart-line); margin-top: 10px; }
+    
+    .main-content { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 20px; }
+    @media (max-width: 960px) { .main-content { grid-template-columns: 1fr; } }
+    
+    .card { background: var(--card-bg); padding: 20px; border-radius: 12px; box-shadow: 0 6px 20px rgba(31,41,55,0.06); border-left: 4px solid rgba(16,24,40,0.03); color: var(--text-primary); }
+    .card h2 { margin-bottom: 20px; color: var(--text-primary); }
+    
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .trade-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+    .btn-primary { background: var(--alert-red); color: var(--text-primary); border-radius:6px; }
+    .btn-primary:hover { filter: brightness(1.03); }
+    .btn-success { background: var(--action-green); color: #07210b; border-radius:6px; }
+    .btn-success:hover { filter: brightness(1.03); }
+    
+    .holdings { margin-top: 20px; }
+    .holding-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .holding-item:last-child { border-bottom: none; }
+    
+    .transactions { max-height: 400px; overflow-y: auto; }
+    .transaction-item { padding: 12px; background: rgba(243,247,252,0.7); border-radius: 6px; margin-bottom: 10px; font-size: 14px; color: var(--text-primary); }
+    .transaction-item .buy { color: var(--action-green); }
+    .transaction-item .sell { color: var(--alert-red); }
+    
+    .chart-container { position: relative; height: 300px; margin-top: 20px; }
+    /* Chart area: enlarged with off-white professional background for clarity */
+    .chart-container {
+      background: linear-gradient(180deg, #fbf9f5 0%, #f5f1ea 100%);
+      border-radius: 10px;
+      padding: 12px;
+      box-shadow: 0 6px 18px rgba(16,24,40,0.12);
+    }
+    
+    .success-msg { background: rgba(124,252,0,0.12); color: var(--highlight-green); padding: 12px; border-radius: 6px; margin-bottom: 15px; }
+    
+    input[type="number"] { width: 100%; }
+  </style>
+</head>
+<body>
+
+<!-- AUTH PAGE -->
+<div id="authPage" class="auth-page active">
+  <div class="auth-container">
+    <div id="loginForm">
+      <h1>Stock Simulator Pro</h1>
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="loginUsername" placeholder="john_doe" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="loginPassword" placeholder="••••••" />
+      </div>
+      <button onclick="login()">Login</button>
+      <div id="loginError" class="error"></div>
+      <div class="toggle-auth">
+        Don't have an account? <a onclick="toggleAuth()">Register</a>
+      </div>
+    </div>
+    
+    <div id="registerForm" style="display:none;">
+      <h1>Create Account</h1>
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="regUsername" placeholder="john_doe" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="regEmail" placeholder="user@example.com" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="regPassword" placeholder="••••••" />
+      </div>
+      <button onclick="register()">Register</button>
+      <div id="regError" class="error"></div>
+      <div class="toggle-auth">
+        Already have an account? <a onclick="toggleAuth()">Login</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="dashboard">
+  <div class="container">
+    <div class="header">
+      <div class="user-info">
+        Welcome, <strong id="userName"></strong> | Cash: <strong id="userCash">$100,000.00</strong>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button id="devRandomBtn" style="display:none;background:#444;color:#fff;padding:6px 10px;border-radius:6px;border:none;font-size:12px;cursor:pointer" onclick="toggleRandomMode()">Random: ?</button>
+        <button class="btn-logout" onclick="logout()">Logout</button>
+      </div>
+    </div>
+    
+    <div class="stats">
+      <div class="stat-card">
+        <h3>Portfolio Value</h3>
+        <div class="value" id="portfolioValue">$100,000.00</div>
+        <div id="profitLoss" style="margin-top:8px;color:#666;font-weight:600"></div>
+      </div>
+      <div class="stat-card">
+        <h3>Holdings</h3>
+        <div class="value" id="holdingsCount">0</div>
+      </div>
+      <div class="stat-card">
+        <h3>Total Trades</h3>
+        <div class="value" id="tradesCount">0</div>
+      </div>
+    </div>
+    
+    <div class="main-content">
+      <!-- Trade Section -->
+      <div class="card">
+        <h2>Stock Trading</h2>
+        <div id="successMsg" class="success-msg" style="display:none;"></div>
+        <div class="form-group">
+          <label>Stock Symbol</label>
+          <input type="text" id="tradeSym" placeholder="AAPL" />
+        </div>
+        <div class="form-group">
+          <label>Current Price: <strong id="currentPrice">$0.00</strong></label>
+          <button onclick="getQuote()" style="width: 100%; margin-top: 5px;">Get Quote</button>
+        </div>
+        <div class="form-group">
+          <label>Quantity</label>
+          <input type="number" id="tradeQty" placeholder="10" min="1" />
+        </div>
+        <div class="trade-buttons">
+          <button class="btn-success" onclick="buyStock()">Buy</button>
+          <button class="btn-primary" onclick="sellStock()">Sell</button>
+        </div>
+      </div>
+      
+      <!-- Stock Chart -->
+      <div class="card">
+        <h2>Price Chart</h2>
+        <div class="chart-container">
+          <canvas id="priceChart"></canvas>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Leaderboard -->
+    <div class="main-content">
+      <div class="card">
+        <h2>Leaderboard</h2>
+        <div id="leaderboardList">
+          <p style="color: #999; text-align: center;">Loading leaderboard...</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="main-content">
+      <!-- Holdings -->
+      <div class="card">
+        <h2>Your Holdings</h2>
+        <div id="holdingsList" class="holdings">
+          <p style="color: #999; text-align: center;">No holdings yet</p>
+        </div>
+      </div>
+      
+      <!-- Recent Transactions -->
+      <div class="card">
+        <h2>Recent Transactions</h2>
+        <div id="transactionsList" class="transactions">
+          <p style="color: #999; text-align: center;">No transactions yet</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let token = localStorage.getItem('token');
+let currentUser = localStorage.getItem('username');
+let currentChart = null;
+
+// Attach token to fetch when available
+function authFetch(url, opts = {}) {
+  opts.headers = opts.headers || {};
+  if (token) opts.headers['Authorization'] = `Bearer ${token}`;
+  return fetch(url, opts);
+}
+
+// === AUTH ===
+function toggleAuth() {
+  const login = document.getElementById('loginForm');
+  const reg = document.getElementById('registerForm');
+  login.style.display = login.style.display === 'none' ? 'block' : 'none';
+  reg.style.display = reg.style.display === 'none' ? 'block' : 'none';
+  document.getElementById('loginError').textContent = '';
+  document.getElementById('regError').textContent = '';
+}
+
+async function register() {
+  const username = document.getElementById('regUsername').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const password = document.getElementById('regPassword').value;
+  if (!username || !email || !password) return document.getElementById('regError').textContent = 'All fields required';
+  if (username.length < 3 || username.length > 20) return document.getElementById('regError').textContent = 'Username must be 3-20 characters';
+  if (password.length < 6) return document.getElementById('regError').textContent = 'Password must be at least 6 characters';
+  const emailRe = /^\S+@\S+\.\S+$/;
+  if (!emailRe.test(email)) return document.getElementById('regError').textContent = 'Email format is invalid';
+  try {
+    const res = await fetch('/api/auth/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, email, password }) });
+    const data = await res.json();
+    if (res.ok) { alert('Registered—please login'); toggleAuth(); }
+    else {
+      if (data && data.errors && Array.isArray(data.errors)) {
+        document.getElementById('regError').textContent = data.errors.map(e=>e.msg).join(' | ');
+      } else {
+        document.getElementById('regError').textContent = data.error || 'Registration failed';
+      }
+    }
+  } catch (err) { document.getElementById('regError').textContent = err.message; }
+}
+
+async function login() {
+  const username = document.getElementById('loginUsername').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  if (!username || !password) return document.getElementById('loginError').textContent = 'Username and password required';
+  try {
+    const res = await fetch('/api/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, password }) });
+    const data = await res.json();
+    if (res.ok) {
+      token = data.token; currentUser = data.username;
+      localStorage.setItem('token', token); localStorage.setItem('username', currentUser);
+      showDashboard(); loadPortfolio();
+    } else document.getElementById('loginError').textContent = data.error || 'Login failed';
+  } catch (err) { document.getElementById('loginError').textContent = err.message; }
+}
+
+function logout() {
+  token = null; currentUser = null; localStorage.removeItem('token'); localStorage.removeItem('username');
+  document.getElementById('authPage').classList.add('active');
+  document.getElementById('dashboard').classList.remove('active');
+}
+
+// === DASHBOARD ===
+function showDashboard() {
+  document.getElementById('authPage').classList.remove('active');
+  document.getElementById('dashboard').classList.add('active');
+  document.getElementById('userName').textContent = currentUser || '';
+}
+
+async function getQuote() {
+  const symbol = document.getElementById('tradeSym').value.trim();
+  if (!symbol) return alert('Enter symbol');
+  try {
+    // Fetch recent chart points (server will use live Yahoo data when not in random-mode)
+    const res = await fetch(`/api/chart/${encodeURIComponent(symbol)}?points=60`);
+    const data = await res.json();
+    if (!res.ok) return alert('Failed to fetch chart: ' + (data.error || res.statusText));
+    const history = data.chartData || [];
+    const lastPrice = history.length ? history[history.length-1].price : 0;
+    document.getElementById('currentPrice').textContent = '$' + (lastPrice || 0).toFixed(2);
+    updateChart({ symbol: data.symbol, history });
+    // show candlestick view by default when available (candles endpoint respects random toggle)
+    try { loadCandles(data.symbol); } catch(e) { console.error('Failed to load candles', e); }
+  } catch (err) { alert('Error: ' + err.message); }
+}
+
+function updateChart(data) {
+  const ctx = document.getElementById('priceChart');
+  if (!data.history || data.history.length === 0) return;
+  const labels = data.history.map(h => new Date(h.time).toLocaleDateString());
+  const prices = data.history.map(h => h.price);
+  console.log('updateChart data:', { symbol: data.symbol, labels, prices });
+  if (currentChart) currentChart.destroy();
+  currentChart = new Chart(ctx, { type: 'line', data: { labels, datasets: [{ label: data.symbol + ' Price', data: prices, borderColor: '#667eea', backgroundColor: 'rgba(102, 126, 234, 0.1)', tension: 0.4, fill: true, pointRadius: 3, pointBackgroundColor: '#667eea' }] }, options: { responsive: true, maintainAspectRatio: false } });
+}
+
+// Draw simple candlestick chart onto the same canvas
+function drawCandlesticks(candles) {
+  const canvas = document.getElementById('priceChart');
+  const ctx = canvas.getContext('2d');
+  const width = canvas.width = canvas.clientWidth || 600;
+  const height = canvas.height = canvas.clientHeight || 300;
+  // paint a light chart background for a professional look
+  ctx.fillStyle = '#fbf9f5';
+  ctx.fillRect(0,0,width,height);
+  // then clear inner plotting area as needed
+  // ctx.clearRect(0,0,width,height);
+  if (!candles || candles.length === 0) return;
+  console.log('drawCandlesticks candles count:', candles.length, 'sample:', candles.slice(0,5));
+
+  // detect Three White Soldiers (a.k.a. three white knights) — simplified rules
+  function detectThreeWhiteSoldiers(list) {
+    const hits = new Set();
+    for (let i = 2; i < list.length; i++) {
+      const a = list[i-2], b = list[i-1], c = list[i];
+      if (!a || !b || !c) continue;
+      // all bullish
+      if (!(a.close > a.open && b.close > b.open && c.close > c.open)) continue;
+      // steadily increasing closes
+      if (!(b.close > a.close && c.close > b.close)) continue;
+      // each open within previous body
+      if (!(b.open >= a.open && b.open <= a.close)) continue;
+      if (!(c.open >= b.open && c.open <= b.close)) continue;
+      // reasonably long bodies (at least 40% of range)
+      const aBody = Math.abs(a.close - a.open); const aRange = (a.high - a.low) || 1;
+      const bBody = Math.abs(b.close - b.open); const bRange = (b.high - b.low) || 1;
+      const cBody = Math.abs(c.close - c.open); const cRange = (c.high - c.low) || 1;
+      if (aBody < aRange*0.4 || bBody < bRange*0.4 || cBody < cRange*0.4) continue;
+      hits.add(i);
+    }
+    return hits;
+  }
+
+  const pad = 10;
+  const plotW = width - pad*2;
+  const plotH = height - pad*2;
+
+  const highs = candles.map(c=>c.high);
+  const lows = candles.map(c=>c.low);
+  const max = Math.max(...highs);
+  const min = Math.min(...lows);
+  const range = max - min || 1;
+
+  // draw subtle grid and axes
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = '#d4c9b8';
+  // horizontal baseline
+  ctx.beginPath(); ctx.moveTo(pad,pad+plotH); ctx.lineTo(pad+plotW,pad+plotH); ctx.stroke();
+  // vertical axis
+  ctx.beginPath(); ctx.moveTo(pad,pad); ctx.lineTo(pad,pad+plotH); ctx.stroke();
+  // light horizontal grid lines
+  ctx.strokeStyle = 'rgba(107,91,63,0.12)';
+  const gridLines = 4;
+  for (let g=0; g<=gridLines; g++) {
+    const gy = pad + (g/gridLines)*plotH;
+    ctx.beginPath(); ctx.moveTo(pad, gy); ctx.lineTo(pad+plotW, gy); ctx.stroke();
+  }
+
+  const stepX = plotW / candles.length;
+  // detect patterns once
+  const patternHits = detectThreeWhiteSoldiers(candles);
+  // draw candles
+  candles.forEach((c, i) => {
+    const x = pad + i * stepX + stepX/2;
+    const yHigh = pad + ((max - c.high)/range)*plotH;
+    const yLow = pad + ((max - c.low)/range)*plotH;
+    const yOpen = pad + ((max - c.open)/range)*plotH;
+    const yClose = pad + ((max - c.close)/range)*plotH;
+
+    // wick (darker than grid)
+    ctx.strokeStyle = 'rgba(30,41,59,0.7)'; ctx.beginPath(); ctx.moveTo(x, yHigh); ctx.lineTo(x, yLow); ctx.stroke();
+    // body
+    const bodyTop = Math.min(yOpen, yClose);
+    const bodyBottom = Math.max(yOpen, yClose);
+    const bodyWidth = Math.max(6, stepX*0.6);
+    const left = x - bodyWidth/2;
+    const color = c.close >= c.open ? '#3AC55C' : '#F25C54';
+    ctx.fillStyle = color; ctx.fillRect(left, bodyTop, bodyWidth, Math.max(1, bodyBottom - bodyTop));
+    // thin border for body for crispness
+    ctx.strokeStyle = 'rgba(0,0,0,0.08)'; ctx.strokeRect(left, bodyTop, bodyWidth, Math.max(1, bodyBottom - bodyTop));
+
+    // highlight Three White Soldiers on the 3rd candle
+    if (patternHits.has(i)) {
+      const markerSize = Math.max(12, Math.min(20, stepX*0.6));
+      const mx = x;
+      const my = yHigh - markerSize - 6;
+      // circular highlight with subtle shadow
+      ctx.beginPath(); ctx.fillStyle = 'rgba(93,138,168,0.12)'; ctx.arc(mx, my, markerSize/2 + 2, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.fillStyle = '#5D8AA8'; ctx.arc(mx, my, markerSize/2, 0, Math.PI*2); ctx.fill();
+      // label
+      ctx.fillStyle = '#fff'; ctx.font = `${Math.max(10, markerSize/3)}px sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('3WS', mx, my);
+    }
+  });
+}
+
+async function loadCandles(symbol) {
+  try {
+    const res = await fetch('/api/candles/' + encodeURIComponent(symbol));
+    const data = await res.json();
+    if (!res.ok) return alert('Failed to load candles: ' + (data.error || res.statusText));
+    if (data.candles && data.candles.length) {
+      // Use last 30 candles
+      drawCandlesticks(data.candles.slice(-30));
+    } else alert('No candle data available');
+  } catch (err) { alert('Error: ' + err.message); }
+}
+
+async function loadPortfolio() {
+  try {
+    const res = await authFetch('/api/user/portfolio');
+    if (!res.ok) { logout(); return; }
+    const portfolio = await res.json();
+    document.getElementById('userCash').textContent = '$' + (portfolio.cash || 0).toFixed(2);
+    document.getElementById('portfolioValue').textContent = '$' + (portfolio.totalValue || 0).toFixed(2);
+    const profit = portfolio.profit || 0;
+    const profitPercent = portfolio.profitPercent || 0;
+    const plEl = document.getElementById('profitLoss');
+    plEl.textContent = `${profit >= 0 ? '+$' : '-$'}${Math.abs(profit).toFixed(2)} (${profitPercent >= 0 ? '+' : ''}${profitPercent.toFixed(2)}%)`;
+    plEl.style.color = profit >= 0 ? '#27ae60' : '#e74c3c';
+
+    const holdings = portfolio.holdings || [];
+    if (holdings.length === 0) {
+      document.getElementById('holdingsList').innerHTML = '<p style="color: #999; text-align: center;">No holdings yet</p>';
+      document.getElementById('holdingsCount').textContent = '0';
+    } else {
+      let html = '';
+      holdings.forEach(h => {
+        html += `<div class="holding-item" onclick="loadCandles('${h.symbol}')"><div><strong>${h.symbol}</strong> &nbsp; <small style=\"color:#666\">@ $${h.price.toFixed(2)}</small></div><strong>${h.quantity} (${(h.value).toFixed(2)})</strong></div>`;
+      });
+      document.getElementById('holdingsList').innerHTML = html;
+      document.getElementById('holdingsCount').textContent = holdings.length;
+      // Auto-load candles for the first holding so the chart area shows data (fallback if Chart.js missing)
+      try { if (holdings[0] && holdings[0].symbol) loadCandles(holdings[0].symbol); } catch (e) { console.error('Auto-load candles failed', e); }
+    }
+    const txRes = await authFetch('/api/transactions');
+    const txData = await txRes.json(); const txs = txData.transactions || [];
+    document.getElementById('tradesCount').textContent = txs.length;
+    if (txs.length === 0) document.getElementById('transactionsList').innerHTML = '<p style="color: #999; text-align: center;">No transactions yet</p>';
+    else { let txHtml = ''; txs.slice(-5).reverse().forEach(tx => { const cls = tx.type === 'BUY' ? 'buy' : 'sell'; const icon = tx.type === 'BUY' ? '→' : '←'; txHtml += `<div class="transaction-item"><div class="${cls}">${tx.type} ${icon}</div><div>${tx.symbol} x${tx.quantity} @ $${tx.price.toFixed(2)}</div><div style="color: #999; font-size: 12px;">${new Date(tx.timestamp).toLocaleDateString()}</div></div>`; }); document.getElementById('transactionsList').innerHTML = txHtml; }
+    // Load leaderboard
+    loadLeaderboard();
+  } catch (err) { console.error(err); }
+}
+
+async function loadLeaderboard() {
+  try {
+    const res = await fetch('/api/leaderboard');
+    const data = await res.json();
+    const list = data.leaderboard || [];
+    if (list.length === 0) return document.getElementById('leaderboardList').innerHTML = '<p style="color:#999;text-align:center">No users yet</p>';
+    let html = '<ol style="padding-left:20px">';
+    list.forEach(u => {
+      const profit = u.profit || 0;
+      const profitText = (profit >= 0 ? '+$' : '-$') + Math.abs(profit).toFixed(2);
+      const profitColor = profit >= 0 ? '#27ae60' : '#e74c3c';
+      html += `<li style="margin:8px 0"><strong>${u.username}</strong> — $${u.totalValue.toFixed(2)} <span style="color:${profitColor}; font-weight:600">(${profitText})</span> <div style="font-size:12px;color:#666">cash $${u.cash.toFixed(2)}</div></li>`;
+    });
+    html += '</ol>';
+    document.getElementById('leaderboardList').innerHTML = html;
+  } catch (err) { console.error('Leaderboard load error', err); }
+}
+
+async function buyStock() {
+  const symbol = document.getElementById('tradeSym').value.trim();
+  const quantity = parseInt(document.getElementById('tradeQty').value);
+  if (!symbol || !quantity) return alert('Symbol and quantity required');
+  try {
+    const res = await authFetch('/api/buy', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ symbol, quantity }) });
+    const data = await res.json();
+    if (res.ok) { document.getElementById('successMsg').textContent = 'Purchase successful!'; document.getElementById('successMsg').style.display = 'block'; setTimeout(() => document.getElementById('successMsg').style.display = 'none', 3000); document.getElementById('tradeQty').value = ''; loadPortfolio(); }
+    else alert('Error: ' + data.error);
+  } catch (err) { alert('Error: ' + err.message); }
+}
+
+async function sellStock() {
+  const symbol = document.getElementById('tradeSym').value.trim();
+  const quantity = parseInt(document.getElementById('tradeQty').value);
+  if (!symbol || !quantity) return alert('Symbol and quantity required');
+  try {
+    const res = await authFetch('/api/sell', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ symbol, quantity }) });
+    const data = await res.json();
+    if (res.ok) { document.getElementById('successMsg').textContent = 'Sale successful!'; document.getElementById('successMsg').style.display = 'block'; setTimeout(() => document.getElementById('successMsg').style.display = 'none', 3000); document.getElementById('tradeQty').value = ''; loadPortfolio(); }
+    else alert('Error: ' + data.error);
+  } catch (err) { alert('Error: ' + err.message); }
+}
+
+// Auto-login if token exists
+window.addEventListener('DOMContentLoaded', () => {
+  if (token && currentUser) { showDashboard(); loadPortfolio(); }
+  // If Chart.js CDN blocked by browser privacy, hide chart area and warn
+  if (typeof Chart === 'undefined') {
+    // Keep the chart container visible so our fallback drawing can render candlesticks
+    console.warn('Chart.js not available — using fallback renderer for candlesticks.');
+  }
+  // show developer toggle if URL contains ?dev=1
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('dev') === '1') {
+      const btn = document.getElementById('devRandomBtn');
+      if (btn) { btn.style.display = 'inline-block'; updateDevRandomButton(); }
+    }
+  } catch(e){}
+});
+
+async function updateDevRandomButton() {
+  try {
+    const res = await authFetch('/api/admin/random-prices');
+    if (!res.ok) return; const data = await res.json();
+    const btn = document.getElementById('devRandomBtn');
+    if (!btn) return;
+    btn.textContent = 'Random: ' + (data.useRandomPrices ? 'ON' : 'OFF');
+    btn.style.background = data.useRandomPrices ? '#27ae60' : '#444';
+  } catch(e){ console.error('updateDevRandomButton', e); }
+}
+
+async function toggleRandomMode() {
+  try {
+    const res0 = await authFetch('/api/admin/random-prices');
+    const cur = await res0.json();
+    const res = await authFetch('/api/admin/random-prices', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ enabled: !cur.useRandomPrices }) });
+    if (!res.ok) { const d = await res.json(); return alert('Failed: ' + (d.error||res.statusText)); }
+    updateDevRandomButton();
+    // refresh portfolio to reflect new pricing mode
+    loadPortfolio();
+  } catch (e) { console.error('toggleRandomMode', e); }
+}
+</script>
+
+</body>
+</html>

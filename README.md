@@ -1,28 +1,185 @@
-<p align="center">
-  <img src="./img.png" alt="Project Banner" width="100%">
-</p>
+# Stock Simulator Pro - Production Edition 📈
 
-# [Project Name] 🎯
+A distributed stock market learning platform with real-time Yahoo Finance data, JWT authentication, historical price tracking, and interactive charts.
 
-## Basic Details
+## Features
 
-### Team Name: [Name]
+### Core Features
+- **JWT Authentication**: Secure login/register with bcrypt password hashing
+- **Real Stock Data**: Live quotes from Yahoo Finance API with fallback mock prices
+- **Historical Tracking**: Store all price history in data.json for graph generation
+- **Interactive Charts**: Chart.js integration for stock price visualization
+- **Transaction History**: Complete trade log with timestamps and details
+- **Portfolio Management**: Real-time holdings and portfolio valuation
+- **Production Logging**: Winston logging for errors and events
 
-### Team Members
-- Member 1: [Name] - [College]
-- Member 2: [Name] - [College]
+### Tech Stack
+- **Backend**: Node.js + Express.js
+- **Authentication**: JWT + bcryptjs
+- **Validation**: express-validator
+- **Logging**: Winston
+- **Data Storage**: JSON file (data.json)
+- **Frontend**: Vanilla JS + Chart.js
+- **API Calls**: Axios
 
-### Hosted Project Link
-[mention your project hosted link here]
+## Installation & Setup
 
-### Project Description
-[2-3 lines about what your project does]
+```bash
+cd backend
+npm install
+npm start
+```
 
-### The Problem statement
-[What problem are you solving?]
+Server runs on `http://localhost:5000`
 
-### The Solution
-[How are you solving it?]
+## API Documentation
+
+### Authentication Routes
+
+**Register User**
+```
+POST /api/auth/register
+Body: { username, password, email }
+```
+
+**Login**
+```
+POST /api/auth/login
+Body: { username, password }
+Returns: { token, username, email }
+```
+
+### Protected Routes (Require Bearer Token)
+
+**Get Portfolio**
+```
+GET /api/user/portfolio
+Header: Authorization: Bearer <token>
+```
+
+**Buy Shares**
+```
+POST /api/buy
+Body: { symbol, quantity }
+```
+
+**Sell Shares**
+```
+POST /api/sell
+Body: { symbol, quantity }
+```
+
+**Get Transactions**
+```
+GET /api/transactions
+```
+
+### Public Routes
+
+**Get Stock Quote with History**
+```
+GET /api/quote/:symbol
+Returns: { symbol, currentPrice, history: [{ time, price }] }
+```
+
+**Get Chart Data**
+```
+GET /api/chart/:symbol
+Returns: { symbol, chartData: [{ time, price }] }
+```
+
+## Data Structure (data.json)
+
+```json
+{
+  "users": {
+    "username": {
+      "password": "hashed_bcrypt",
+      "email": "user@example.com",
+      "cash": 100000,
+      "holdings": { "AAPL": 10, "GOOGL": 5 },
+      "createdAt": "ISO_TIMESTAMP",
+      "transactions": [
+        {
+          "type": "BUY",
+          "symbol": "AAPL",
+          "quantity": 10,
+          "price": 230.5,
+          "total": 2305,
+          "timestamp": "ISO_TIMESTAMP"
+        }
+      ]
+    }
+  },
+  "priceHistory": {
+    "AAPL": [
+      { "time": "ISO_TIMESTAMP", "price": 230.5 },
+      { "time": "ISO_TIMESTAMP", "price": 231.2 }
+    ]
+  }
+}
+```
+
+## Frontend Features
+
+- **Authentication Page**: Register and login with validation
+- **Dashboard**: Overview of portfolio and stats
+- **Trading Interface**: Buy/sell stocks with real-time quotes
+- **Price Charts**: Interactive Chart.js graphs for price history
+- **Holdings List**: View current positions
+- **Transaction History**: Recent trades with timestamps
+
+## Security Features
+
+- JWT tokens expire after 7 days
+- Passwords hashed with bcrypt (10 rounds)
+- Input validation on all routes
+- Error logging without exposing sensitive data
+- CORS enabled for frontend-backend communication
+
+## Logging
+
+Logs are written to:
+- `combined.log` - All events
+- `error.log` - Errors only
+- Console output for development
+
+## Production Deployment Checklist
+
+- [ ] Change JWT_SECRET environment variable
+- [ ] Set NODE_ENV=production
+- [ ] Use cloud database instead of data.json
+- [ ] Add rate limiting
+- [ ] Enable HTTPS
+- [ ] Use reverse proxy (nginx)
+- [ ] Set up monitoring and alerting
+- [ ] Configure backup strategy for data.json
+- [ ] Add API rate limiting
+- [ ] Implement request throttling
+
+## Sample Test Flow
+
+1. Register: `POST /api/auth/register` with username, password, email
+2. Login: `POST /api/auth/login` - get token
+3. Get Portfolio: `GET /api/user/portfolio` with Bearer token
+4. Get Quote: `GET /api/quote/AAPL` - see current price
+5. Buy Stock: `POST /api/buy` with symbol and quantity
+6. View Holdings: `GET /api/user/portfolio` - see updated portfolio
+7. Check Chart: `GET /api/chart/AAPL` - see price history
+8. Sell Stock: `POST /api/sell` with symbol and quantity
+
+## Improvements from MVP
+
+- ✅ Full JWT authentication system
+- ✅ Password hashing with bcrypt
+- ✅ Historical price storage and tracking
+- ✅ Interactive Chart.js graphs
+- ✅ Production-level error handling
+- ✅ Comprehensive logging
+- ✅ Input validation
+- ✅ Transaction history
+- ✅ Professional frontend UI
+- ✅ Responsive design
 
 ---
 

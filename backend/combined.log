@@ -1,0 +1,59 @@
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T17:15:35.266Z"}
+{"level":"warn","message":"Validation error: [{\"type\":\"field\",\"value\":\"12345\",\"msg\":\"Password min 6 chars\",\"path\":\"password\",\"location\":\"body\"}]","timestamp":"2026-02-13T17:28:45.280Z"}
+{"level":"info","message":"User registered: ash","timestamp":"2026-02-13T17:34:05.139Z"}
+{"level":"info","message":"User logged in: ash","timestamp":"2026-02-13T17:34:17.236Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-13T17:34:53.125Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-13T17:35:23.652Z"}
+{"level":"info","message":"Buy transaction: ash bought 3 AAPL @ $230.5","timestamp":"2026-02-13T17:35:23.659Z"}
+{"level":"info","message":"User registered: ashiq","timestamp":"2026-02-13T17:49:29.998Z"}
+{"level":"info","message":"User logged in: ashiq","timestamp":"2026-02-13T17:49:57.965Z"}
+{"level":"warn","message":"Failed to fetch real price for AMZN, using mock","timestamp":"2026-02-13T17:51:25.128Z"}
+{"level":"warn","message":"Failed to fetch real price for AMZN, using mock","timestamp":"2026-02-13T17:51:50.548Z"}
+{"level":"info","message":"Buy transaction: ashiq bought 27 AMZN @ $198.7","timestamp":"2026-02-13T17:51:50.552Z"}
+{"level":"warn","message":"Failed to fetch real price for AMZN, using mock","timestamp":"2026-02-13T17:53:23.993Z"}
+{"level":"info","message":"Sell transaction: ashiq sold 4 AMZN @ $198.7","timestamp":"2026-02-13T17:53:24.001Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T18:01:32.178Z"}
+{"level":"warn","message":"Failed to fetch real price for AMZN, using mock","timestamp":"2026-02-13T20:01:20.501Z"}
+{"level":"info","message":"User logged in: ash","timestamp":"2026-02-13T20:01:41.797Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-13T20:01:43.039Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-13T20:13:07.622Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-13T20:13:18.471Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-13T20:13:37.535Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T20:22:07.520Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T20:28:53.119Z"}
+{"level":"info","message":"User logged in: ash","timestamp":"2026-02-13T20:29:39.274Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-13T20:29:40.000Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T20:31:35.802Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T20:33:05.642Z"}
+{"level":"warn","message":"Failed to fetch real price for AMZN, using mock","timestamp":"2026-02-13T20:33:36.902Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-13T20:33:36.940Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-13T20:35:22.844Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-13T20:35:23.096Z"}
+{"level":"warn","message":"Failed to fetch real price for AMZN, using mock","timestamp":"2026-02-13T20:35:23.285Z"}
+{"level":"warn","message":"Failed to fetch real price for BABA, using mock","timestamp":"2026-02-13T20:39:36.479Z"}
+{"level":"warn","message":"Failed to fetch real price for 532540, using mock","timestamp":"2026-02-13T20:40:19.988Z"}
+{"level":"warn","message":"Failed to fetch real price for 532540, using mock","timestamp":"2026-02-13T20:40:21.693Z"}
+{"level":"warn","message":"Failed to fetch real price for 532540, using mock","timestamp":"2026-02-13T20:40:23.679Z"}
+{"level":"warn","message":"Failed to fetch real price for TCS, using mock","timestamp":"2026-02-13T20:40:31.535Z"}
+{"level":"warn","message":"Failed to fetch real price for TCS, using mock","timestamp":"2026-02-13T20:40:32.995Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T20:45:00.164Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-13T20:45:44.550Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-13T20:45:44.699Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE, trying next (Request failed with status code 401)","timestamp":"2026-02-13T20:45:44.909Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE, using mock","timestamp":"2026-02-13T20:45:44.911Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T20:49:36.604Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T20:53:29.608Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T20:55:09.755Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T21:02:12.940Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T21:04:43.939Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-13T21:05:19.955Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-13T21:05:20.341Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, trying next (Request failed with status code 401)","timestamp":"2026-02-13T21:05:20.658Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-13T21:05:20.660Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T21:09:43.332Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T21:22:53.532Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T21:46:25.628Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T21:52:59.580Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T21:57:38.089Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T22:35:42.661Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T23:19:37.249Z"}
