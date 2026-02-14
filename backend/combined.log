@@ -171,3 +171,4 @@
 {"level":"warn","message":"Failed to fetch real price for RELIANCE, trying next (Request failed with status code 401)","timestamp":"2026-02-14T02:02:30.188Z"}
 {"level":"warn","message":"Failed to fetch real price for RELIANCE, using mock","timestamp":"2026-02-14T02:02:30.191Z"}
 {"level":"info","message":"Sell transaction: nile varghese sold 5 RELIANCE @ $100","timestamp":"2026-02-14T02:02:30.206Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-14T03:02:45.896Z"}
