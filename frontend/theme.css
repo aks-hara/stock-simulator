@@ -1,0 +1,47 @@
+/* Theme: soft pastel warm palette (Dark Purple / Soft Pink / Light Peach / Off-White)
+   Fonts: Poppins + Roboto fallbacks
+*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@400;700&display=swap');
+
+:root{
+  --dark-purple: #190933;
+  --soft-pink: #EE9E8E;
+  --light-peach: #FFDBC3;
+  --off-white: #FFF5E0;
+
+  --primary-bg: var(--off-white);
+  --card-bg: var(--light-peach);
+  --action: var(--soft-pink);
+  --text-primary: var(--dark-purple);
+  --text-secondary: rgba(25,9,51,0.72);
+  --muted: rgba(25,9,51,0.48);
+  --accent: var(--soft-pink);
+  --chart-line: var(--dark-purple);
+}
+
+/* Base */
+html,body{height:100%;}
+body{
+  font-family: 'Poppins', 'Roboto', 'Open Sans', -apple-system, 'Segoe UI', sans-serif;
+  background: linear-gradient(180deg, var(--primary-bg), #fff6ea 100%);
+  color: var(--text-primary);
+}
+
+/* Cards and containers */
+.card, .auth-container, .stat-card, .header{ background: var(--card-bg); }
+
+/* Buttons */
+button{ background: var(--action); color: var(--text-primary); }
+.btn-success{ background: var(--action); color: var(--text-primary); }
+.btn-logout{ background: rgba(25,9,51,0.06); color: var(--text-primary); }
+
+/* Typography helpers */
+.h1{ font-weight:700; }
+.h2{ font-weight:600; }
+.muted{ color: var(--muted); }
+
+/* Small UI touches */
+.card{ border-radius:12px; box-shadow: 0 6px 18px rgba(25,9,51,0.06); }
+
+/* Accessibility: focus */
+input:focus, button:focus{ outline: 3px solid rgba(25,9,51,0.06); }

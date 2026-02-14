@@ -5,21 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Stock Simulator Pro</title>
   <script src="chart.local.js"></script>
+  <link rel="stylesheet" href="theme.css">
   <style>
     :root{
-      --primary-bg: #FAF8F3; /* off-white background */
-      --card-bg: #fefdfb; /* off-white card */
-      --action-green: #E8E3DB; /* Off-white (bullish) */
-      --alert-red: #D9D2C8; /* Off-white/beige (bearish) */
-      --text-primary: #5c4a38; /* brown text */
-      --text-secondary: #8B6F47; /* medium brown */
-      --highlight-green: #7CFC00;
-      --chart-line: #6B5B3F; /* dark brown */
+      /* Palette from design brief */
+      --dark-purple: #190933; /* primary text / deep accent */
+      --soft-pink: #EE9E8E; /* buttons, highlights */
+      --light-peach: #FFDBC3; /* card backgrounds */
+      --off-white: #FFF5E0; /* main app background */
+
+      /* Legacy variable names kept for compatibility */
+      --primary-bg: var(--off-white);
+      --card-bg: var(--light-peach);
+      --action-green: var(--soft-pink);
+      --alert-red: var(--soft-pink);
+      --text-primary: var(--dark-purple);
+      --text-secondary: rgba(25,9,51,0.72);
+      --highlight-green: var(--dark-purple);
+      --chart-line: var(--dark-purple);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: Inter, Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: linear-gradient(180deg, var(--primary-bg), #f5f1ea 100%);
+      font-family: 'Poppins', 'Roboto', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(180deg, var(--primary-bg), #fff6ea 100%);
       color: var(--text-primary);
       min-height: 100vh;
       padding: 20px;
@@ -44,7 +52,7 @@
     .form-group label { display: block; margin-bottom: 8px; color: var(--text-secondary); font-weight: 500; }
     .form-group input { width: 100%; padding: 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06); background: #F0F0F5; color: #111; }
     .form-group input:focus { outline: none; border-color: rgba(58,197,92,0.6); }
-    button { width: 100%; padding: 12px; background: var(--action-green); color: #07210b; border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 10px; box-shadow: 0 6px 18px rgba(58,197,92,0.08); }
+    button { width: 100%; padding: 12px; background: var(--action-green); color: var(--text-primary); border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 10px; box-shadow: 0 6px 18px rgba(25,9,51,0.06); }
     button:hover { filter: brightness(1.03); }
     .toggle-auth { text-align: center; margin-top: 20px; color: var(--text-secondary); }
     .toggle-auth a { color: var(--action-green); cursor: pointer; text-decoration: underline; }
@@ -85,7 +93,7 @@
     .trade-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
     .btn-primary { background: var(--alert-red); color: var(--text-primary); border-radius:6px; }
     .btn-primary:hover { filter: brightness(1.03); }
-    .btn-success { background: var(--action-green); color: #07210b; border-radius:6px; }
+    .btn-success { background: var(--action-green); color: var(--text-primary); border-radius:6px; }
     .btn-success:hover { filter: brightness(1.03); }
     
     .holdings { margin-top: 20px; }
@@ -449,12 +457,12 @@ function drawCandlesticks(candles) {
 
 async function loadCandles(symbol) {
   try {
-    const res = await fetch('/api/candles/' + encodeURIComponent(symbol));
+    const res = await fetch('/api/candles/' + encodeURIComponent(symbol) + '?days=20');
     const data = await res.json();
     if (!res.ok) return alert('Failed to load candles: ' + (data.error || res.statusText));
     if (data.candles && data.candles.length) {
-      // Use last 30 candles
-      drawCandlesticks(data.candles.slice(-30));
+      // Use last 20 candles
+      drawCandlesticks(data.candles.slice(-20));
     } else alert('No candle data available');
   } catch (err) { alert('Error: ' + err.message); }
 }

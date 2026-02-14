@@ -57,3 +57,117 @@
 {"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T21:57:38.089Z"}
 {"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T22:35:42.661Z"}
 {"level":"info","message":"Server running on port 5000","timestamp":"2026-02-13T23:19:37.249Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2026-02-14T00:35:02.114Z"}
+{"level":"info","message":"User registered: parvathy","timestamp":"2026-02-14T00:36:10.731Z"}
+{"level":"info","message":"User logged in: parvathy","timestamp":"2026-02-14T00:36:50.274Z"}
+{"level":"warn","message":"Failed to fetch real price for TSLA.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:37:20.858Z"}
+{"level":"warn","message":"Failed to fetch real price for TSLA.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:37:21.056Z"}
+{"level":"warn","message":"Failed to fetch real price for TSLA, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:37:21.258Z"}
+{"level":"warn","message":"Failed to fetch real price for TSLA, using mock","timestamp":"2026-02-14T00:37:21.264Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:37:34.480Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:37:34.674Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:37:34.982Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-14T00:37:34.986Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:42:39.839Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:42:40.248Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:42:40.557Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-14T00:42:40.560Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:44:48.354Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:44:48.455Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:44:48.561Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-14T00:44:48.562Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:45:01.461Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:45:01.662Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:45:01.769Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-14T00:45:01.770Z"}
+{"level":"info","message":"Buy transaction: parvathy bought 2 AAPL @ $230.5","timestamp":"2026-02-14T00:45:01.774Z"}
+{"level":"warn","message":"Failed to fetch real price for NVDA.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:46:18.587Z"}
+{"level":"warn","message":"Failed to fetch real price for NVDA.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:46:19.218Z"}
+{"level":"warn","message":"Failed to fetch real price for NVDA, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:46:19.412Z"}
+{"level":"warn","message":"Failed to fetch real price for NVDA, using mock","timestamp":"2026-02-14T00:46:19.414Z"}
+{"level":"warn","message":"Failed to fetch real price for NVDA.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:47:08.539Z"}
+{"level":"warn","message":"Failed to fetch real price for NVDA.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:47:08.644Z"}
+{"level":"warn","message":"Failed to fetch real price for NVDA, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:47:08.743Z"}
+{"level":"warn","message":"Failed to fetch real price for NVDA, using mock","timestamp":"2026-02-14T00:47:08.747Z"}
+{"level":"info","message":"Buy transaction: parvathy bought 3 NVDA @ $890.2","timestamp":"2026-02-14T00:47:08.756Z"}
+{"level":"warn","message":"Failed to fetch real price for TSLA.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:48:04.334Z"}
+{"level":"warn","message":"Failed to fetch real price for TSLA.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:48:04.462Z"}
+{"level":"warn","message":"Failed to fetch real price for TSLA, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:48:04.587Z"}
+{"level":"warn","message":"Failed to fetch real price for TSLA, using mock","timestamp":"2026-02-14T00:48:04.588Z"}
+{"level":"warn","message":"Failed to fetch real price for TSLA.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:48:09.556Z"}
+{"level":"warn","message":"Failed to fetch real price for TSLA.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:48:09.689Z"}
+{"level":"warn","message":"Failed to fetch real price for TSLA, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:48:09.822Z"}
+{"level":"warn","message":"Failed to fetch real price for TSLA, using mock","timestamp":"2026-02-14T00:48:09.833Z"}
+{"level":"info","message":"Buy transaction: parvathy bought 5 TSLA @ $245.3","timestamp":"2026-02-14T00:48:09.849Z"}
+{"level":"warn","message":"Failed to fetch real price for NVDA.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:48:29.388Z"}
+{"level":"warn","message":"Failed to fetch real price for NVDA.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:48:29.540Z"}
+{"level":"warn","message":"Failed to fetch real price for NVDA, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:48:29.750Z"}
+{"level":"warn","message":"Failed to fetch real price for NVDA, using mock","timestamp":"2026-02-14T00:48:29.751Z"}
+{"level":"info","message":"Sell transaction: parvathy sold 1 NVDA @ $890.2","timestamp":"2026-02-14T00:48:29.763Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:49:21.046Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:49:21.461Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:49:21.660Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-14T00:49:21.661Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:49:24.542Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:49:24.737Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, trying next (Request failed with status code 401)","timestamp":"2026-02-14T00:49:24.866Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-14T00:49:24.869Z"}
+{"level":"info","message":"Sell transaction: parvathy sold 1 AAPL @ $230.5","timestamp":"2026-02-14T00:49:24.876Z"}
+{"level":"info","message":"User registered: nidha","timestamp":"2026-02-14T01:45:01.716Z"}
+{"level":"info","message":"User logged in: nidha","timestamp":"2026-02-14T01:45:09.455Z"}
+{"level":"warn","message":"Failed to fetch real price for MSFT.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T01:45:55.349Z"}
+{"level":"warn","message":"Failed to fetch real price for MSFT.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T01:45:55.468Z"}
+{"level":"warn","message":"Failed to fetch real price for MSFT, trying next (Request failed with status code 401)","timestamp":"2026-02-14T01:45:55.603Z"}
+{"level":"warn","message":"Failed to fetch real price for MSFT, using mock","timestamp":"2026-02-14T01:45:55.610Z"}
+{"level":"warn","message":"Failed to fetch real price for MSFT.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T01:46:09.485Z"}
+{"level":"warn","message":"Failed to fetch real price for MSFT.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T01:46:09.629Z"}
+{"level":"warn","message":"Failed to fetch real price for MSFT, trying next (Request failed with status code 401)","timestamp":"2026-02-14T01:46:09.909Z"}
+{"level":"warn","message":"Failed to fetch real price for MSFT, using mock","timestamp":"2026-02-14T01:46:09.910Z"}
+{"level":"info","message":"Buy transaction: nidha bought 6 MSFT @ $415.8","timestamp":"2026-02-14T01:46:09.928Z"}
+{"level":"info","message":"User registered: JOHN","timestamp":"2026-02-14T01:47:04.360Z"}
+{"level":"info","message":"User logged in: nidha","timestamp":"2026-02-14T01:47:09.867Z"}
+{"level":"info","message":"User logged in: JOHN","timestamp":"2026-02-14T01:48:04.627Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T01:48:31.834Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T01:48:31.940Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, trying next (Request failed with status code 401)","timestamp":"2026-02-14T01:48:32.152Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-14T01:48:32.156Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T01:48:45.009Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T01:48:45.152Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, trying next (Request failed with status code 401)","timestamp":"2026-02-14T01:48:45.348Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-14T01:48:45.351Z"}
+{"level":"info","message":"Buy transaction: JOHN bought 1 AAPL @ $230.5","timestamp":"2026-02-14T01:48:45.365Z"}
+{"level":"info","message":"User registered: NILE","timestamp":"2026-02-14T01:57:31.586Z"}
+{"level":"info","message":"User registered: nile varghese","timestamp":"2026-02-14T01:58:42.514Z"}
+{"level":"info","message":"User logged in: nile varghese","timestamp":"2026-02-14T01:59:00.845Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T01:59:34.915Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T01:59:35.088Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, trying next (Request failed with status code 401)","timestamp":"2026-02-14T01:59:35.295Z"}
+{"level":"warn","message":"Failed to fetch real price for AAPL, using mock","timestamp":"2026-02-14T01:59:35.299Z"}
+{"level":"info","message":"Buy transaction: nile varghese bought 35 AAPL @ $230.5","timestamp":"2026-02-14T01:59:35.309Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T02:01:37.000Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T02:01:37.246Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE, trying next (Request failed with status code 401)","timestamp":"2026-02-14T02:01:37.361Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE, using mock","timestamp":"2026-02-14T02:01:37.363Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T02:01:37.538Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T02:01:37.659Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE, trying next (Request failed with status code 401)","timestamp":"2026-02-14T02:01:37.775Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE, using mock","timestamp":"2026-02-14T02:01:37.781Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T02:01:38.374Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T02:01:38.579Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE, trying next (Request failed with status code 401)","timestamp":"2026-02-14T02:01:38.990Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE, using mock","timestamp":"2026-02-14T02:01:38.993Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T02:02:02.645Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T02:02:02.846Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE, trying next (Request failed with status code 401)","timestamp":"2026-02-14T02:02:02.952Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE, using mock","timestamp":"2026-02-14T02:02:02.956Z"}
+{"level":"info","message":"Buy transaction: nile varghese bought 28 RELIANCE @ $100","timestamp":"2026-02-14T02:02:02.974Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T02:02:29.067Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T02:02:29.372Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE.NS, trying next (Request failed with status code 401)","timestamp":"2026-02-14T02:02:29.378Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE, trying next (Request failed with status code 401)","timestamp":"2026-02-14T02:02:29.677Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE, using mock","timestamp":"2026-02-14T02:02:29.677Z"}
+{"level":"info","message":"Sell transaction: nile varghese sold 5 RELIANCE @ $100","timestamp":"2026-02-14T02:02:29.685Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE.BO, trying next (Request failed with status code 401)","timestamp":"2026-02-14T02:02:29.692Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE, trying next (Request failed with status code 401)","timestamp":"2026-02-14T02:02:30.188Z"}
+{"level":"warn","message":"Failed to fetch real price for RELIANCE, using mock","timestamp":"2026-02-14T02:02:30.191Z"}
+{"level":"info","message":"Sell transaction: nile varghese sold 5 RELIANCE @ $100","timestamp":"2026-02-14T02:02:30.206Z"}

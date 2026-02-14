@@ -98,7 +98,7 @@ async function getPrice(symbol) {
 }
 
 // Generate random daily OHLC candles for `days` prior to today
-function generateRandomDailyCandles(symbol, days = 30) {
+function generateRandomDailyCandles(symbol, days = 20) {
   const s = (symbol || '').toUpperCase();
   const data = readData();
   const history = data.priceHistory?.[s] || [];
@@ -227,7 +227,7 @@ app.get('/api/simulate/:symbol/:date', async (req, res) => {
     const symbol = req.params.symbol.toUpperCase();
     const sym = symbol.toUpperCase();
     if (useRandomPrices) {
-      const days = parseInt(req.query.days) || 30;
+      const days = parseInt(req.query.days) || 20;
       const candles = generateRandomDailyCandles(sym, days);
       return res.json({ symbol: sym, candles });
     }
@@ -565,7 +565,7 @@ app.get('/api/quote/:symbol', async (req, res) => {
     res.json({
       symbol: symbol.toUpperCase(),
       currentPrice: price,
-      history: history.slice(-30) // Last 30 data points for graph
+      history: history.slice(-20) // Last 20 data points for graph
     });
   } catch (err) {
     logger.error(`Quote error: ${err.message}`);
@@ -580,7 +580,7 @@ app.get('/api/chart/:symbol', async (req, res) => {
     const sym = symbol.toUpperCase();
     if (useRandomPrices) {
       // return a random daily close series for charting
-      const days = parseInt(req.query.days) || 30;
+      const days = parseInt(req.query.days) || 20;
       const candles = generateRandomDailyCandles(sym, days);
       // convert to simple history points (time, price) using close
       const history = candles.map(c => ({ time: c.time, price: c.close }));
@@ -612,10 +612,11 @@ app.get('/api/candles/:symbol', async (req, res) => {
   try {
     const { symbol } = req.params;
     const sym = (symbol || '').toUpperCase();
+    const days = Math.max(1, parseInt(req.query.days) || 20);
 
     // If runtime random-mode is enabled, return generated random daily candles
     if (useRandomPrices) {
-      const days = parseInt(req.query.days) || 30;
+      const days = parseInt(req.query.days) || 20;
       const candles = generateRandomDailyCandles(sym, days);
       return res.json({ symbol: sym, candles });
     }
@@ -677,7 +678,8 @@ app.get('/api/candles/:symbol', async (req, res) => {
       candles.push({ time: date, open, high, low, close });
     }
 
-    res.json({ symbol: sym, candles });
+    // honor `days` query param by returning only the most recent `days` candles
+    res.json({ symbol: sym, candles: candles.slice(-days) });
   } catch (err) {
     logger.error(`Candles error: ${err.message}`);
     res.status(500).json({ error: err.message });
