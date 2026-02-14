@@ -2,27 +2,27 @@
   <img src="./img.png" alt="Project Banner" width="100%">
 </p>
 
-# [Project Name] 🎯
+# [Stock simulator] 🎯
 
 ## Basic Details
 
-### Team Name: [Name]
+### Team Name: [Void main]
 
 ### Team Members
-- Member 1: [Name] - [College]
-- Member 2: [Name] - [College]
+- Member 1: [Akshara K] - [Government Engineering College, Thrissur]
+- Member 2: [Parvathy.P] - [Government Engineering College,Thrissur]
 
 ### Hosted Project Link
-[mention your project hosted link here]
+[https://stock-simulator-ggup.onrender.com/]
 
 ### Project Description
-[2-3 lines about what your project does]
+[It is a gamified stock trading simulator that lets users practice investing with virtual money. Users can trade real stocks using live data, track their portfolios, and compete on a leaderboard. The platform combines hands-on learning, analytics, and gamification to teach financial literacy safely and interactively.]
 
 ### The Problem statement
-[What problem are you solving?]
+[Many students and beginner investors are interested in learning how the stock market works, but they lack practical experience due to financial risk, fear of losses, and limited access to guided simulation platforms. Traditional learning methods (theory-based courses or static examples) fail to provide real-world exposure to market fluctuations and decision-making under uncertainty.]
 
 ### The Solution
-[How are you solving it?]
+[Build a web-based stock market simulator where users get virtual cash to buy and sell real stocks using live market data. The platform tracks portfolios in real time, displays a leaderboard to gamify learning, and provides charts and insights to help users understand market dynamics—all without financial risk]
 
 ---
 
@@ -31,25 +31,19 @@
 ### Technologies/Components Used
 
 **For Software:**
-- Languages used: [e.g., JavaScript, Python, Java]
-- Frameworks used: [e.g., React, Django, Spring Boot]
-- Libraries used: [e.g., axios, pandas, JUnit]
-- Tools used: [e.g., VS Code, Git, Docker]
+- Languages used: [ Vanilla JavaScript, HTML5, CSS3]
+- Frameworks used: [Express.js]
+- Libraries used: [axios,cors,bycryptjs,winston,jsonwebtoken,express-validator]
+- Tools used: [ VS Code, Git, Render]
 
-**For Hardware:**
-- Main components: [List main components]
-- Specifications: [Technical specifications]
-- Tools required: [List tools needed]
-
----
 
 ## Features
 
 List the key features of your project:
-- Feature 1: [Description]
-- Feature 2: [Description]
-- Feature 3: [Description]
-- Feature 4: [Description]
+- Virtual Trading System: [Buy/sell stocks with virtual currency ($100,000 starting balance);  Real-time portfolio tracking with market value, P&L, and profit percentage;  Transaction history with buy/sell details, prices, and timestamps & Support for multiple stock symbols (AAPL, GOOGL, MSFT, TSLA, etc.]
+- Dual price mode : [Live Yahoo Finance Data: Fetch real stock prices with NSE/BSE support (e.g., .NS, .BO suffixes); Simulated Mode: GBM-based random daily candles with realistic volatility, gap jumps, and volume;  Runtime toggle via /api/admin/random-prices endpoint for seamless switching]
+- Competitive leader board: [Real-time ranking of users by total portfolio value;  Shows rank, portfolio value, cash, market value, and P&L per user;  Encourages competitive learning and performance tracking;  Automatically calculated based on current market prices]
+- Secure Authentication & User Management: [JWT-based token authentication with 7-day expiration;  bcrypt password hashing (10 rounds) for secure credential storage;  Email validation and username uniqueness checks;  Persistent user sessions via localStorage;  Protected API routes with middleware-level authorization;  Isolated user data (holdings, cash, transactions) per account]
 
 ---
 
@@ -59,21 +53,14 @@ List the key features of your project:
 
 #### Installation
 ```bash
-[Installation commands - e.g., npm install, pip install -r requirements.txt]
+[Installation commands - npm install]
 ```
 
 #### Run
 ```bash
-[Run commands - e.g., npm start, python app.py]
+[Run commands - npm start, node server.js]
 ```
 
-### For Hardware:
-
-#### Components Required
-[List all components needed with specifications]
-
-#### Circuit Setup
-[Explain how to set up the circuit]
 
 ---
 
@@ -83,38 +70,54 @@ List the key features of your project:
 
 #### Screenshots (Add at least 3)
 
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+![Screenshot1]
+<img width="1900" height="946" alt="image" src="https://github.com/user-attachments/assets/fa82faec-5d0b-4197-aa83-4294f3fb7b79" />
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
+*This is the user login/ registration page.*
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+![Screenshot2]
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/24f65330-00cd-45de-b3dc-4a5f2e21bf8e" />
+*This is the page after signing in. It displays user name, portfolio, holdings etc and trading options*
+
+
+![Screenshot3]
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/628a1966-58a8-4b22-9cd0-c71525f0b1f7" />
+
+*this shows the leaderboard and the candlebar chart of the portfolio*
 
 #### Diagrams
 
 **System Architecture:**
 
 ![Architecture Diagram](docs/architecture.png)
-*Explain your system architecture - components, data flow, tech stack interaction*
+![WhatsApp Image 2026-02-14 at 10 45 48 AM](https://github.com/user-attachments/assets/c6cea5f4-265b-4a30-80bf-4e779237a429)
 
+FRONTEND (HTML/CSS/Vanilla JS)
+    ↓ HTTP + JWT
+BACKEND (Express.js)
+    ├─ Auth: bcryptjs + jsonwebtoken
+    ├─ API Routes: Trading, portfolio, charts, leaderboard
+    ├─ Price Engine: Yahoo API or GBM simulation
+    └─ Business Logic: Portfolio calc, P&L, candles
+    ↓ File I/O
+DATA (data.json)
+    ├─ Users (accounts, holdings, transactions)
+    └─ Price History (time-series data)
 **Application Workflow:**
 
 ![Workflow](docs/workflow.png)
-*Add caption explaining your workflow*
+*1.Registration → User creates account (username, email, password)
+2.Login → Credentials verified, JWT token issued → stored in browser
+3.Dashboard → View $100k starting balance, cash, portfolio value, P&L4. 4.Trading →Enter symbol + quantity
+Click Buy/Sell
+Price fetched → Holdings updated → Cash adjusted
+5.Charts → Click symbol → Fetch OHLC candles → Render 
+6.Leaderboard → View top 10 users ranked by portfolio value
+7.Logout → Clear JWT token → End session*
 
 ---
 
-### For Hardware:
 
-#### Schematic & Circuit
-
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
 
 #### Build Photos
 
@@ -215,52 +218,7 @@ xcodebuild -workspace App.xcworkspace -scheme App -configuration Debug
 
 ---
 
-### For Hardware Projects:
 
-#### Bill of Materials (BOM)
-
-| Component | Quantity | Specifications | Price | Link/Source |
-|-----------|----------|----------------|-------|-------------|
-| Arduino Uno | 1 | ATmega328P, 16MHz | ₹450 | [Link] |
-| LED | 5 | Red, 5mm, 20mA | ₹5 each | [Link] |
-| Resistor | 5 | 220Ω, 1/4W | ₹1 each | [Link] |
-| Breadboard | 1 | 830 points | ₹100 | [Link] |
-| Jumper Wires | 20 | Male-to-Male | ₹50 | [Link] |
-| [Add more...] | | | | |
-
-**Total Estimated Cost:** ₹[Amount]
-
-#### Assembly Instructions
-
-**Step 1: Prepare Components**
-1. Gather all components listed in the BOM
-2. Check component specifications
-3. Prepare your workspace
-![Step 1](images/assembly-step1.jpg)
-*Caption: All components laid out*
-
-**Step 2: Build the Power Supply**
-1. Connect the power rails on the breadboard
-2. Connect Arduino 5V to breadboard positive rail
-3. Connect Arduino GND to breadboard negative rail
-![Step 2](images/assembly-step2.jpg)
-*Caption: Power connections completed*
-
-**Step 3: Add Components**
-1. Place LEDs on breadboard
-2. Connect resistors in series with LEDs
-3. Connect LED cathodes to GND
-4. Connect LED anodes to Arduino digital pins (2-6)
-![Step 3](images/assembly-step3.jpg)
-*Caption: LED circuit assembled*
-
-**Step 4: [Continue for all steps...]**
-
-**Final Assembly:**
-![Final Build](images/final-build.jpg)
-*Caption: Completed project ready for testing*
-
----
 
 ### For Scripts/CLI Tools:
 
@@ -374,12 +332,12 @@ python script.py -v --format json data.json
 
 If you used AI tools during development, document them here for transparency:
 
-**Tool Used:** [e.g., GitHub Copilot, v0.dev, Cursor, ChatGPT, Claude]
+**Tool Used:** [ vs code Copilot, Gemini, ChatGPT]
 
 **Purpose:** [What you used it for]
-- Example: "Generated boilerplate React components"
-- Example: "Debugging assistance for async functions"
-- Example: "Code review and optimization suggestions"
+-  "Debugging assistance"
+-  "Code review and optimization suggestions"
+-  
 
 **Key Prompts Used:**
 - "Create a REST API endpoint for user authentication"
